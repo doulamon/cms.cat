@@ -66,7 +66,9 @@ server {
 
 ## 🏘️ 社区
 
-* [QQ群](https://qm.qq.com/cgi-bin/qm/qr?k=JxlOD5x4fr2nwXNLQ973FSmMemzmR35F&jump_from=webapi)
+[QQ群](https://qm.qq.com/cgi-bin/qm/qr?k=JxlOD5x4fr2nwXNLQ973FSmMemzmR35F&jump_from=webapi)
+
+![QQgroup](https://user-images.githubusercontent.com/95879856/147330280-d57627e7-fb3d-4b42-bf44-b20ae771c936.JPG)
 
 ## 📄 授权
 
