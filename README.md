@@ -1,10 +1,10 @@
 <p align = "center">
-<img alt="CatCms" src="https://cms.cat/upload/10000/image/2021/12/23/cat.png">
+<img alt="CatCms" src="https://user-images.githubusercontent.com/95879856/147455181-fc28af03-6ae2-440e-b28f-d59717e64677.png">
 </p>
 
 ## 💡 简介
 
-[CatCms](https://github.com/doulamon/cms.cat) 是一款轻量级支持多用户，数据读写分离的内容管理系统。CatCms支持媒体文件管理，后台功能丰富，使用灵活，主题开发简单。
+[CatCms](https://github.com/doulamon/cms.cat) 是一款轻量级支持多用户，数据读写分离的内容管理系统。支持媒体文件管理，后台功能丰富，使用灵活，主题开发简单。
 
 ## 🗃 案例
 
@@ -25,19 +25,19 @@
 
 ### 管理后台
 
-![dashboard.png](https://github.com/doulamon/cms.cat/blob/main/dashboard.png)
+![dashboard](https://user-images.githubusercontent.com/95879856/147455037-c176c5bd-4f83-4917-b7b6-b1bb383ef6ab.png)
 
 ### 编辑主题
 
-![code.png](https://github.com/doulamon/cms.cat/blob/main/code.png)
+![code](https://user-images.githubusercontent.com/95879856/147455056-231f2149-65af-42b4-ad1c-572a179b6656.png)
 
 ### 主题选择
 
-![theme.png](https://github.com/doulamon/cms.cat/blob/main/theme.png)
+![theme](https://user-images.githubusercontent.com/95879856/147455073-c6c3250c-a861-4fc8-b3b2-64168a9731e0.png)
 
 ### 媒体管理
 
-![media.png](https://github.com/doulamon/cms.cat/blob/main/media.png)
+![media](https://user-images.githubusercontent.com/95879856/147455090-950aa76b-a892-42b8-bbd8-2dd6bba9f6b5.png)
 
 ## 🛠️ 安装
 
