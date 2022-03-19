@@ -56,7 +56,7 @@ server {
 
     location / {
         proxy_pass http://CatCms$request_uri;
-        proxy_set_header  Host $host:$server_port;
+        proxy_set_header  Host $host;
         proxy_set_header  X-Real-IP  $remote_addr;
         proxy_set_header X-Appengine-Remote-Addr $remote_addr;
         client_max_body_size  10m;
@@ -111,6 +111,11 @@ CatCms 使用“自底向上”的分类方式：
 3. 注册用户名即二级域名前缀访问
 
 ```
+map $http_upgrade $connection_upgrade {
+        default upgrade;
+        '' close;
+}
+
 server {
      listen 80;
      server_name domain.com *.domain.com;
