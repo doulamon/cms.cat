@@ -61,6 +61,10 @@ server {
         proxy_set_header X-Appengine-Remote-Addr $remote_addr;
         client_max_body_size  10m;
     }
+    location /console {# 配置为你自己的后台地址
+	   alias  /app; # 后台文件根目录
+	   try_files $uri $uri/ index.html;
+    }
 }
 ```
 
@@ -142,6 +146,10 @@ server {
          proxy_set_header Upgrade $http_upgrade;
          proxy_set_header Connection  $connection_upgrade;
      }
+     location /console {# 配置为你自己的后台地址
+	   alias  /app; # 后台文件根目录
+	   try_files $uri $uri/ index.html;
+    }
 }
 ```
 
