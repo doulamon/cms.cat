@@ -46,22 +46,40 @@ CatCms 支持Linux/Windows 界面化安装
 ### NGINX 代理
 
 ```nginx
-upstream CatCms {
-    server localhost:2021;
+map $http_upgrade $connection_upgrade {
+        default upgrade;
+        '' close;
 }
 
 server {
-    listen 80;
-    server_name domain.com; # 配置为你自己的域名
+     listen 80;
+     server_name domain.com *.domain.com;
+     return 301 https://$host$request_uri;
+}
 
-    location / {
-        proxy_pass http://CatCms$request_uri;
-        proxy_set_header  Host $host;
-        proxy_set_header  X-Real-IP  $remote_addr;
-        proxy_set_header X-Appengine-Remote-Addr $remote_addr;
-        client_max_body_size  10m;
-    }
-    location /console {# 配置为你自己的后台地址
+server {
+     listen 80;
+     listen 443 ssl;
+     ssl_certificate conf.d/ssl/1_domain.com_bundle.crt;
+     ssl_certificate_key conf.d/ssl/2_domain.com.key;
+     ssl_session_cache shared:SSL:1m;
+     ssl_session_timeout  10m;
+     ssl_ciphers HIGH:!aNULL:!MD5;
+     ssl_prefer_server_ciphers on;
+ 
+     location / {
+         proxy_pass http://localhost:2021;
+	 client_max_body_size 200m;
+         proxy_set_header Host $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Appengine-Remote-Addr $remote_addr;
+           
+         proxy_http_version 1.1;
+         proxy_set_header Upgrade $http_upgrade;
+         proxy_set_header Connection  $connection_upgrade;
+     }
+     
+     location /console {# 配置为你自己的后台地址
 	   alias  /app; # 后台文件根目录
 	   try_files $uri $uri/ index.html;
     }
@@ -113,45 +131,6 @@ CatCms 使用“自底向上”的分类方式：
 1. 网站主解析泛域名至服务器
 2. 通过配置 NGINX 实现域名反向代理
 3. 注册用户名即二级域名前缀访问
-
-```
-map $http_upgrade $connection_upgrade {
-        default upgrade;
-        '' close;
-}
-
-server {
-     listen 80;
-     server_name domain.com *.domain.com;
-     return 301 https://$host$request_uri;
-}
-
-server {
-     listen 80;
-     listen 443 ssl;
-     ssl_certificate conf.d/ssl/1_domain.com_bundle.crt;
-     ssl_certificate_key conf.d/ssl/2_domain.com.key;
-     ssl_session_cache shared:SSL:1m;
-     ssl_session_timeout  10m;
-     ssl_ciphers HIGH:!aNULL:!MD5;
-     ssl_prefer_server_ciphers on;
- 
-     location / {
-         proxy_pass http://localhost:2021;
-         proxy_set_header Host $host;
-         proxy_set_header X-Real-IP $remote_addr;
-         proxy_set_header X-Appengine-Remote-Addr $remote_addr;
-           
-         proxy_http_version 1.1;
-         proxy_set_header Upgrade $http_upgrade;
-         proxy_set_header Connection  $connection_upgrade;
-     }
-     location /console {# 配置为你自己的后台地址
-	   alias  /app; # 后台文件根目录
-	   try_files $uri $uri/ index.html;
-    }
-}
-```
 
 ## 运维
 
