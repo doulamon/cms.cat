@@ -97,11 +97,10 @@ server {
 CatCms 免费使用
 
 ## 🙏 鸣谢
-
 * [Nightingale](https://github.com/didi/nightingale)： 夜莺是新一代国产智能监控系统
 * [Pipe](https://github.com/88250/pipe)： Pipe是一款小而美打开源博客平台
 * [Vue.js](https://github.com/vuejs/vue)： 渐进式 JavaScript 框架
-* [Vditor](https://github.com/Vanessa219/vditor)： 浏览器端的 Markdown 编辑器
+* [V-md-editor](https://github.com/code-farmer-i/vue-markdown-editor)： v-md-editor 是基于 Vue 开发的 markdown 编辑器组件
 * [Gin](https://github.com/gin-gonic/gin)： 又快又好用的 golang HTTP Web 框架
 * [GORM](https://github.com/jinzhu/gorm)： 极好的 golang ORM 库
 
