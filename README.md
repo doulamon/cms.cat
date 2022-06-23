@@ -68,15 +68,35 @@ server {
      ssl_prefer_server_ciphers on;
  
      location / {
-         proxy_pass http://localhost:2021;
-	 client_max_body_size 200m;
-         proxy_set_header Host $host;
-         proxy_set_header X-Real-IP $remote_addr;
-         proxy_set_header X-Appengine-Remote-Addr $remote_addr;
-           
-         proxy_http_version 1.1;
-         proxy_set_header Upgrade $http_upgrade;
-         proxy_set_header Connection  $connection_upgrade;
+     
+	#if ($http_user_agent !~* "baiduspider|360spider|Sogou web spider|Sosospider|YisouSpider|Bingbot|Googlebot") {
+		#return 404;
+	#}
+	if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {
+		return 403;
+	}
+
+	if ($http_user_agent ~* "WinHttp|WebZIP|FetchURL|node-superagent|java/|FeedDemon|Jullo|
+		JikeSpider|Indy Library|Alexa Toolbar|AskTbFXTV|AhrefsBot|CrawlDaddy|Java|Feedly|
+		Apache-HttpAsyncClient|UniversalFeedParser|ApacheBench|Microsoft URL Control|
+		Swiftbot|ZmEu|oBot|jaunty|Python-urllib|lightDeckReports Bot|YYSpider|DigExt|
+		HttpClient|MJ12bot|heritrix|EasouSpider|Ezooms|BOT/0.1|YandexBot|FlightDeckReports|Linguee Bot|^$" ) {
+		return 403;
+	}
+	
+	# 配置服务默认端口或定义的端口
+	proxy_pass http://localhost:2021;
+	client_max_body_size 200m;
+	proxy_set_header Host $host;
+	proxy_set_header X-Real-IP $remote_addr;
+	proxy_set_header X-Appengine-Remote-Addr $remote_addr;
+	add_header X-Frame-Options DENY always;
+        add_header X-Content-Type-Options nosniff always;
+
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection  $connection_upgrade;
+	
      }
      
      location /console {# 配置为你自己的后台地址
