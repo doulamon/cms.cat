@@ -25,19 +25,19 @@
 
 ### 管理后台
 
-![dashboard](https://user-images.githubusercontent.com/95879856/147455037-c176c5bd-4f83-4917-b7b6-b1bb383ef6ab.png)
+![dashboard](https://user-images.githubusercontent.com/95879856/175338449-11f30d95-c96b-457f-b644-4705eba103f2.png)
 
 ### 编辑主题
 
-![code](https://user-images.githubusercontent.com/95879856/147455056-231f2149-65af-42b4-ad1c-572a179b6656.png)
+![code](https://user-images.githubusercontent.com/95879856/175338504-52eebbcf-59f9-4b92-988f-926e52989e2c.png)
 
 ### 主题选择
 
-![theme](https://user-images.githubusercontent.com/95879856/147455073-c6c3250c-a861-4fc8-b3b2-64168a9731e0.png)
+![theme](https://user-images.githubusercontent.com/95879856/175338557-9610cb85-96f9-451e-809b-9f3c60307119.png)
 
 ### 媒体管理
 
-![media](https://user-images.githubusercontent.com/95879856/147455090-950aa76b-a892-42b8-bbd8-2dd6bba9f6b5.png)
+![media](https://user-images.githubusercontent.com/95879856/175338645-5485d453-d853-4dd8-9221-12401a4f62a0.png)
 
 ## 🛠️ 安装
 
@@ -69,9 +69,11 @@ server {
  
      location / {
      
-	#if ($http_user_agent !~* "baiduspider|360spider|Sogou web spider|Sosospider|YisouSpider|Bingbot|Googlebot") {
-		#return 404;
-	#}
+	if ($http_user_agent !~* "baiduspider|360spider|Sogou web spider|
+		Sosospider|YisouSpider|Bingbot|Googlebot") {
+		#return 403;
+	}
+	
 	if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {
 		return 403;
 	}
@@ -80,7 +82,8 @@ server {
 		JikeSpider|Indy Library|Alexa Toolbar|AskTbFXTV|AhrefsBot|CrawlDaddy|Java|Feedly|
 		Apache-HttpAsyncClient|UniversalFeedParser|ApacheBench|Microsoft URL Control|
 		Swiftbot|ZmEu|oBot|jaunty|Python-urllib|lightDeckReports Bot|YYSpider|DigExt|
-		HttpClient|MJ12bot|heritrix|EasouSpider|Ezooms|BOT/0.1|YandexBot|FlightDeckReports|Linguee Bot|^$" ) {
+		HttpClient|MJ12bot|heritrix|EasouSpider|Ezooms|BOT/0.1|YandexBot|FlightDeckReports|
+		Linguee Bot|^$" ) {
 		return 403;
 	}
 	
@@ -99,8 +102,8 @@ server {
 	
      }
      
-     location /console {# 配置为你自己的后台地址
-	   alias  /app; # 后台文件根目录
+     location /console {# 配置自定义的后台访问路径
+	   alias  /app; # 后台静态文件路径
 	   try_files $uri $uri/ index.html;
     }
 }
